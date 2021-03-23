@@ -1,0 +1,138 @@
+:root {
+  --tile-size: 20px;
+  --cols: 24;
+  --rows: 7;
+  --subtile-size: calc(var(--tile-size) / 2);
+  --subrows: var(--rows);
+  --subcols: 9;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div.board,
+div.subboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  transform-style: preserve-3d;
+}
+
+div.board {
+  width: calc(var(--tile-size) * var(--rows));
+  height: calc(var(--tile-size) * var(--cols));
+  transform: rotateX(45deg) rotateZ(45deg);
+  margin-bottom: 13px;
+}
+
+div.subboard {
+  position: absolute;
+  z-index: 99;
+  width: calc(var(--subtile-size) * var(--subrows));
+  height: calc(var(--subtile-size) * var(--subcols));
+  right: var(--tile-size);
+  top: var(--tile-size);
+}
+
+div[data-tile],
+div[data-subtile] {
+  background-color: rgb(211, 211, 211);
+  will-change: transform, background-color;
+  transition: transform 500ms ease-in-out, background-color 500ms ease-in-out;
+  transform-style: preserve-3d;
+}
+
+div[data-tile] {
+  flex: 1 1 var(--tile-size);
+  width: var(--tile-size);
+}
+div[data-subtile] {
+  flex: 1 1 var(--subtile-size);
+  width: var(--subtile-size);
+}
+
+div.active,
+div[data-tile='4-9'],
+div[data-tile='2-9'] {
+  background-color: white;
+  transform: translateZ(var(--tile-size));
+}
+
+div[data-tile='4-9'],
+div[data-tile='2-9'] {
+  animation: seconds-animation 1s ease-in-out;
+  animation-iteration-count: infinite;
+}
+div[data-tile='2-9'] {
+  animation-delay: 0.5s;
+}
+
+div[data-tile]:before,
+div[data-tile]:after,
+div[data-subtile]:before,
+div[data-subtile]:after {
+  content: '';
+  position: absolute;
+}
+
+div[data-tile]:before,
+div[data-tile]:after {
+  width: var(--tile-size);
+  height: var(--tile-size);
+}
+
+div[data-subtile]:before,
+div[data-subtile]:after {
+  width: var(--subtile-size);
+  height: var(--subtile-size);
+}
+
+div[data-tile]:before,
+div[data-subtile]:before {
+  transform-origin: 100% 100%;
+  transform: rotateX(-90deg) translateY(100%);
+}
+
+div[data-tile]:before {
+  background-color: rgb(67, 67, 151);
+}
+
+div[data-subtile]:before {
+  background-color: rgb(170, 83, 51);
+}
+
+div[data-tile]:after,
+div[data-subtile]:after {
+  transform-origin: 100% 100%;
+  transform: rotateY(90deg) translateX(100%);
+}
+
+div[data-tile]:after {
+  background-color: rgb(118, 118, 255);
+}
+
+div[data-subtile]:after {
+  background-color: coral;
+}
+
+@keyframes seconds-animation {
+  0% {
+    transform: translateZ(0);
+  }
+  50% {
+    transform: translateZ(var(--tile-size));
+  }
+  100% {
+    transform: translateZ(0);
+  }
+}

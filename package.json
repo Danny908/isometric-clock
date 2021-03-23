@@ -1,0 +1,15 @@
+{
+  "name": "isometric-clock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Daniel Torres",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^12.0.1"
+  }
+}
