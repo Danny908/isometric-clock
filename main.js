@@ -30,8 +30,8 @@ function createWindow() {
     },
   });
   win.setResizable(false);
-  win.webContents.openDevTools();
-  win.loadFile('src/index.html');
+  // win.webContents.openDevTools();
+  win.loadFile('index.html');
   createMenus(win);
 }
 
